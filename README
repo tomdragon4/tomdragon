@@ -1,0 +1,7 @@
+TomDragon (Projet GL M1 info 2017-2018)
+
+TomDragon est un projet open source ayant pour but la création d'une application permettant la manipulation de formule mathématique sous la forme d'un jeu éducatif.
+
+Branches :
+
+   tomDragonServer: Branche prototype d'un backend intégrant TOM.
