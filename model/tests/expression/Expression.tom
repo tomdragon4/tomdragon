@@ -1,0 +1,160 @@
+
+%include { string.tom }
+
+%include { int.tom }
+
+%typeterm BinOp {
+  implement { expression.types.BinOp }
+  is_sort(t) { ($t instanceof expression.types.BinOp) }
+
+  equals(t1,t2) { ($t1==$t2) }
+
+}
+
+%typeterm LeftOp {
+  implement { expression.types.LeftOp }
+  is_sort(t) { ($t instanceof expression.types.LeftOp) }
+
+  equals(t1,t2) { ($t1==$t2) }
+
+}
+
+%typeterm RigthOp {
+  implement { expression.types.RigthOp }
+  is_sort(t) { ($t instanceof expression.types.RigthOp) }
+
+  equals(t1,t2) { ($t1==$t2) }
+
+}
+
+%typeterm Exp {
+  implement { expression.types.Exp }
+  is_sort(t) { ($t instanceof expression.types.Exp) }
+
+  equals(t1,t2) { ($t1==$t2) }
+
+}
+%op BinOp Plus() {
+  is_fsym(t) { ($t instanceof expression.types.binop.Plus) }
+  make() { expression.types.binop.Plus.make() }
+}
+
+%op BinOp Mult() {
+  is_fsym(t) { ($t instanceof expression.types.binop.Mult) }
+  make() { expression.types.binop.Mult.make() }
+}
+
+%op BinOp Eq() {
+  is_fsym(t) { ($t instanceof expression.types.binop.Eq) }
+  make() { expression.types.binop.Eq.make() }
+}
+
+%op BinOp Moins() {
+  is_fsym(t) { ($t instanceof expression.types.binop.Moins) }
+  make() { expression.types.binop.Moins.make() }
+}
+
+%op BinOp Divide() {
+  is_fsym(t) { ($t instanceof expression.types.binop.Divide) }
+  make() { expression.types.binop.Divide.make() }
+}
+
+%op BinOp Diff() {
+  is_fsym(t) { ($t instanceof expression.types.binop.Diff) }
+  make() { expression.types.binop.Diff.make() }
+}
+
+%op BinOp Inf() {
+  is_fsym(t) { ($t instanceof expression.types.binop.Inf) }
+  make() { expression.types.binop.Inf.make() }
+}
+
+%op BinOp Sup() {
+  is_fsym(t) { ($t instanceof expression.types.binop.Sup) }
+  make() { expression.types.binop.Sup.make() }
+}
+
+%op BinOp Infegal() {
+  is_fsym(t) { ($t instanceof expression.types.binop.Infegal) }
+  make() { expression.types.binop.Infegal.make() }
+}
+
+%op BinOp Supegal() {
+  is_fsym(t) { ($t instanceof expression.types.binop.Supegal) }
+  make() { expression.types.binop.Supegal.make() }
+}
+
+%op BinOp Or() {
+  is_fsym(t) { ($t instanceof expression.types.binop.Or) }
+  make() { expression.types.binop.Or.make() }
+}
+
+%op BinOp And() {
+  is_fsym(t) { ($t instanceof expression.types.binop.And) }
+  make() { expression.types.binop.And.make() }
+}
+
+%op LeftOp Non() {
+  is_fsym(t) { ($t instanceof expression.types.leftop.Non) }
+  make() { expression.types.leftop.Non.make() }
+}
+
+%op LeftOp Parenthesis() {
+  is_fsym(t) { ($t instanceof expression.types.leftop.Parenthesis) }
+  make() { expression.types.leftop.Parenthesis.make() }
+}
+
+%op LeftOp Sqrt() {
+  is_fsym(t) { ($t instanceof expression.types.leftop.Sqrt) }
+  make() { expression.types.leftop.Sqrt.make() }
+}
+
+%op LeftOp MoinsU() {
+  is_fsym(t) { ($t instanceof expression.types.leftop.MoinsU) }
+  make() { expression.types.leftop.MoinsU.make() }
+}
+
+%op RigthOp Factorial() {
+  is_fsym(t) { ($t instanceof expression.types.rigthop.Factorial) }
+  make() { expression.types.rigthop.Factorial.make() }
+}
+
+%op RigthOp Power() {
+  is_fsym(t) { ($t instanceof expression.types.rigthop.Power) }
+  make() { expression.types.rigthop.Power.make() }
+}
+
+%op Exp Nombre(i:int) {
+  is_fsym(t) { ($t instanceof expression.types.exp.Nombre) }
+  get_slot(i, t) { $t.geti() }
+  make(t0) { expression.types.exp.Nombre.make($t0) }
+}
+
+%op Exp Litteral(name:String) {
+  is_fsym(t) { ($t instanceof expression.types.exp.Litteral) }
+  get_slot(name, t) { $t.getname() }
+  make(t0) { expression.types.exp.Litteral.make($t0) }
+}
+
+%op Exp BinOpExp(Exp1:Exp, OpB:BinOp, Exp2:Exp) {
+  is_fsym(t) { ($t instanceof expression.types.exp.BinOpExp) }
+  get_slot(Exp1, t) { $t.getExp1() }
+  get_slot(OpB, t) { $t.getOpB() }
+  get_slot(Exp2, t) { $t.getExp2() }
+  make(t0, t1, t2) { expression.types.exp.BinOpExp.make($t0, $t1, $t2) }
+}
+
+%op Exp RigthOpExp(Exp1:Exp, ROp:RigthOp) {
+  is_fsym(t) { ($t instanceof expression.types.exp.RigthOpExp) }
+  get_slot(Exp1, t) { $t.getExp1() }
+  get_slot(ROp, t) { $t.getROp() }
+  make(t0, t1) { expression.types.exp.RigthOpExp.make($t0, $t1) }
+}
+
+%op Exp LeftOpExp(LOp:LeftOp, Exp1:Exp) {
+  is_fsym(t) { ($t instanceof expression.types.exp.LeftOpExp) }
+  get_slot(LOp, t) { $t.getLOp() }
+  get_slot(Exp1, t) { $t.getExp1() }
+  make(t0, t1) { expression.types.exp.LeftOpExp.make($t0, $t1) }
+}
+
