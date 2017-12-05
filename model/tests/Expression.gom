@@ -1,0 +1,37 @@
+module Expression
+imports int String
+abstract syntax
+
+Exp = Nombre(i:int)
+    | Litteral(name:String)
+    | BinOpExp(Exp1:Exp,Bop:BinOp,Exp2:Exp)
+    | RightOpExp(Exp1:Exp,Rop:RightOp)
+    | LeftOpExp(Lop:LeftOp,Exp1:Exp)
+    | ParentOp(other:Parent, Exp1:Exp)
+
+Op = BOp(Ope1:BinOp) | ROp(Ope2:RightOp) | LOp(Ope3:LeftOp) | Par(Ope4:Parent)
+
+BinOp = Plus()
+      | Mult()
+      | Eq()
+      | Moins()
+      | Divide()
+      | Diff()
+      | Inf()
+      | Sup()
+      | Infegal()
+      | Supegal()
+      | Or()
+      | And()
+     
+RightOp = Factorial() | Power()
+     
+LeftOp = Non ()
+       | Sqrt()
+       | MoinsU()
+       
+Parent = Parenthesis()
+
+module Expression:rules() {
+  Nombre(a) -> Nombre(a)
+}
